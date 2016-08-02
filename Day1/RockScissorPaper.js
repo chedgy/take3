@@ -1,7 +1,6 @@
 //
 //Get user input for game
 
-
 do {
 	var userTurn = prompt ("Enter your choice of (R)ock, (S)cissor, or (P)aper");
 	userTurn=userTurn.toUpperCase(); //to allow lower case and upper case of r, s, p
