@@ -9,47 +9,41 @@ onclick="loadDoc()">Change Content
 </button>
 
 <script>
+
+
 function loadDoc() {
-  var xhttp;
-  xhttp=new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState === 4 && xhttp.status === 200) {
-      //document.getElementById("demo").innerHTML = xhttp.responseText;
-      // parse responseText
-      /*<ul>
-            <li></li>
-            <li></li>
-        </ul>
+    document.getElementById("demo").innerHTML="Movie Info";
+  
+
+    var xhttp;
+    xhttp=new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+            var movie = JSON.parse(xhttp.responseText);
+            // var ListStr="<ul>";
+
+            // for (x in movie){
+            //     ListStr+="<li>"+x + "=" + movie[x]+"</li>";  //can create whole string and then append to page this way also works
+            //     console.log (x + "=" + movie[x]);
+            // }
+
+            // ListStr+="</ul>";
+
+            //            document.body.appendChild(div);
+
+            var ul =document.createElement('ul');
+            for (var x in movie){
+                var li=document.createElement("li");  //append list (li) to list (ul) and then at bottom append whole thing to web page
+                li.innerHTML=x + ": " + movie[x];
+                ul.appendChild(li);
+            }
+            document.body.appendChild(ul);
+    //console.log (data);
+        }
+    };
     
-
-      */
-
-      var movie = JSON.parse(xhttp.responseText);
-
-       var ListStr="<ul>";
-
-      for (x in movie){
-         ListStr+="<li>"+x + "=" + movie[x]+"</li>";
-
-        //console.log (x + "=" + movie[x]);
-      }
-
-      ListStr+="</ul>";
-
-      var div = document.createElement ("div");
-      div.innerHTML = ListStr;
-      document.body.appendChild(div);
-
-
-
-
-    
-    
-      //console.log (data);
-    }
-  };
-  xhttp.open("GET", 'http://www.omdbapi.com/?t=batman&y=&plot=short&r=json', true);
-  xhttp.send();
+    xhttp.open("GET", 'http://www.omdbapi.com/?t=batman&y=&plot=short&r=json', true);
+    xhttp.send();
 }
 
 </script>
