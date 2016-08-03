@@ -1,0 +1,14 @@
+package pkg1;
+
+
+
+
+public class Abcd  {
+	String myVar;
+	
+	public Abcd() {
+		// TODO Auto-generated constructor stub
+		myVar="hi";
+	}
+	
+}

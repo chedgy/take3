@@ -27,12 +27,15 @@ sel.onchange=function(evt){			//on click event for selection
 
 //-------------------------------------------
 
-//var txtFilter=document.getElementById("filter");
-// txtFilter.onkeyup=function (evt){
-// 	 filter=txtFilter.value;
+var txtFilter=document.getElementById("filter");
+txtFilter.onkeyup=function (evt){
+	 filter=txtFilter.value;
+console.log (filter);
+
+
 		
 
-// };
+};
 
 
 //-----------------------------------------
@@ -50,10 +53,16 @@ function GetPics(){ //using json retrieve pics and put in div tag
            div=document.createElement('div');
            div.id="allPics";
            div.style.border="solid";
-       
+       filter="c";
             
-            	
+            	alert(filter);
                for (var x in pics){
+
+               		 if (pics[x].includes(filter)){
+               		alert("filter")
+               		// }
+               			
+
                			var img=document.createElement ("img");
              	 		img.title=pics[x].description;
             			img.src=" http://localhost:8080/images/" + pics[x].url;
