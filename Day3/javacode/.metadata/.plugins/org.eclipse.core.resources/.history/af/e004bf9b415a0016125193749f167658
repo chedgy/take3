@@ -27,17 +27,10 @@ public class Stack {
 	public void push(int val){
 		if (this.store.length==this.len){//grow array
 			int [] tempStore=new int [(this.len)*2];
-			
-			for (int i=0;i<this.store.length;i++){
-				tempStore[i]=this.store[i];
-			}
-			
+			tempStore=this.store;
 			
 			store=new int[(this.len)*2];
-			for (int i=0; i<tempStore.length;i++){
-				this.store[i]=tempStore[i];
-			}
-			
+			this.store=tempStore;
 		}
 		
 		this.store[this.len]=val;

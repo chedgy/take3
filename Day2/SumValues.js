@@ -11,4 +11,4 @@ function sum(){
 	return tempSum;
 }
 
-alert(sum (1,2,3,4,5,6));
+//alert(sum (1,2,3,4,5,6));

@@ -60,32 +60,7 @@ function ConvertValues(entry){
 }
 
 
-//function ComputeWinner(userTurn){
 
-
-	// //eval users input and convert to #
-	// var userValue;
-	// userTurn=userTurn.toUpperCase();
-	// if (userTurn==="R" ){
-	// 	userValue=0;
-	// }else if (userTurn==="S"){
-	// 	userValue=1;
-	// }else if (userTurn==="P"){
-	// 	userValue=2;
-	// }
-
-	// //get computer generated value
-	// var computerValue=Math.floor(Math.random()*3);
-
-	// //Convert computer value to string
-	// var computerStringValue;
-	// if (computerValue===0){
-	// 	computerStringValue="rock";
-	// }else if (computerValue===1){
-	// 	computerStringValue="scissor";
-	// }else if (computerValue===2){
-	// 	computerStringValue="paper";
-	// }
 
 
 function ComputeWinner(userValue, computerValue){
@@ -107,7 +82,6 @@ function ComputeWinner(userValue, computerValue){
 DomPrompt("Enter your choice of (R)ock, (S)cissor, or (P)aper");
 //get text in text box and eval if enter clicked and then get value
 var userTurn;
-var useValue;
 var computerStringValue;
 
 var userInput = document.getElementById('txtPrompt');
