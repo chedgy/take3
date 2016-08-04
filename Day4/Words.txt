@@ -1,0 +1,8 @@
+house
+bat
+cat
+mouse
+apple
+dog
+giraffe
+elephant

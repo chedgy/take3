@@ -1,0 +1,36 @@
+package filestreams;
+import java.io.*;
+import java.util.*;
+
+
+public class SortFile {
+
+	public static void main(String[] args) {
+		
+	        try {
+	            FileReader reader = new FileReader("C:\\GitFile\\take3\\day4\\words.txt");
+	            BufferedReader bufferedReader = new BufferedReader(reader);
+	 
+	            String line;
+	            List<String> words = new ArrayList<String>(50);
+	            
+	            while ((line = bufferedReader.readLine()) != null) {
+	                //System.out.println(line);
+	            	
+	            	words.add(line);
+	            	
+	            }
+	            reader.close();
+	            Collections.sort(words);
+	            
+	     
+	            	System.out.print(words);
+	         
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	
+	
+
+}

@@ -1,0 +1,26 @@
+package filestreams;
+import java.io.*;
+
+
+public class SortFile {
+
+	public static void main(String[] args) {
+		
+	        try {
+	            FileReader reader = new FileReader("C:\\GitFile\\take3\\day4\\words.txt);
+	            BufferedReader bufferedReader = new BufferedReader(reader);
+	 
+	            String line;
+	 
+	            while ((line = bufferedReader.readLine()) != null) {
+	                System.out.println(line);
+	            }
+	            reader.close();
+	 
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	 
+
+}

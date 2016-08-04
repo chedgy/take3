@@ -1,0 +1,77 @@
+package filestreams;
+import java.io.*;
+import java.util.*;
+
+
+public class SortFile {
+
+	public static void main(String[] args) {
+		 File file=  new File("C:\\GitFile\\take3\\day4\\sortedWords.txt");
+		 FileReader reader =null;
+		 FileWriter writer=null;
+		 
+		 
+	        try {
+	            //FileReader reader = new FileReader("C:\\GitFile\\take3\\day4\\words.txt");
+	        	reader= new FileReader("C:\\GitFile\\take3\\day4\\words.txt");
+	            BufferedReader bufferedReader = new BufferedReader(reader);
+	            //create reader
+	 
+	            String line;
+	            List<String> words = new ArrayList<String>(); //create list
+	            
+	            while ((line = bufferedReader.readLine()) != null) {
+	                //System.out.println(line);
+	            	
+	            	words.add(line); //read each line from reader 
+	            	
+	            }
+	            
+	            bufferedReader.close();
+	            
+	            Collections.sort(words); //sort list
+	                      
+	           
+
+				
+				if (!file.exists()) {//create file if not exist 
+					file.createNewFile();
+				}
+
+	            
+	           writer=new FileWriter(file);//create writer
+	           BufferedWriter  bufferedWriter=new BufferedWriter(writer);
+	            
+	          
+	            
+	            for (String s:words){  //loop thru items
+	            	  bufferedWriter.write(s + "\r\n" );  //write back to file
+	            }
+	           
+	        	
+	            bufferedWriter.close();
+	            
+	            
+	         
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } finally {
+	        	
+	        	 try {
+					reader.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        	 try {
+					writer.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        }
+	    }
+	
+	
+
+}

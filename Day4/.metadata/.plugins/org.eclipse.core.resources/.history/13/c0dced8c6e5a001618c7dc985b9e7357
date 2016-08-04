@@ -1,0 +1,57 @@
+package filestreams;
+import java.io.*;
+import java.util.*;
+
+
+public class SortFile {
+
+	public static void main(String[] args) {
+		
+	        try {
+	            FileReader reader = new FileReader("C:\\GitFile\\take3\\day4\\words.txt");
+	            BufferedReader bufferedReader = new BufferedReader(reader);
+	            //create reader
+	 
+	            String line;
+	            List<String> words = new ArrayList<String>(50); //create list
+	            
+	            while ((line = bufferedReader.readLine()) != null) {
+	                //System.out.println(line);
+	            	
+	            	words.add(line); //read each line from reader 
+	            	
+	            }
+	            reader.close();
+	            Collections.sort(words); //sort list
+	                      
+	            File file = new File("C:\\GitFile\\take3\\sortedWords.txt");
+
+				
+				if (!file.exists()) {//create file if not exist 
+					file.createNewFile();
+				}
+
+	            
+	            FileWriter writer=new FileWriter(file);//create writer
+	            BufferedWriter bufferedWriter=new BufferedWriter(writer);
+	            
+	            //bufferedWriter.write(words);
+	            
+	            for (String s:words){s
+	            	System.out.println(s);
+
+	            }
+	            bufferedWriter.close();
+
+	            
+	            
+	            
+	         
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	
+	
+
+}

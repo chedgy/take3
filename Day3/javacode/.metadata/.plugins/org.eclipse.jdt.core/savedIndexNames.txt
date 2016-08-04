@@ -14,7 +14,6 @@ INDEX VERSION 1.126+C:\GitFile\take3\Day3\javacode\.metadata\.plugins\org.eclips
 2133282975.index
 808374113.index
 618723895.index
-3271193799.index
 471236001.index
 985286902.index
 4184201189.index

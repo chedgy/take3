@@ -26,14 +26,14 @@ public class Stack {
 	
 	public void push(int val){
 		if (this.store.length==this.len){//grow array
-			int [] tempStore=new int [(this.len)*2];
+			int [] tempStore=new int [this.store.length*2];
 			
 			for (int i=0;i<this.store.length;i++){
 				tempStore[i]=this.store[i];
 			}
 			
 			
-			store=new int[(this.len)*2];
+			store=new int[this.store.length*2];
 			for (int i=0; i<tempStore.length;i++){
 				this.store[i]=tempStore[i];
 			}
@@ -54,7 +54,17 @@ public class Stack {
 			
 		
 		}
-				
+		
+			
 		
 	}
+	public void testMethod(){
+		int [] arr=new int[7];
+		Object[] oArr=new Object [10];
+		
+		oArr[0]=6;
+		
+		
+	}
+	
 }
