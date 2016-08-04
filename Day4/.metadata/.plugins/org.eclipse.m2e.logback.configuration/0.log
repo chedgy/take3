@@ -77,3 +77,4 @@ org.apache.lucene.index.IndexNotFoundException: no segments* file found in org.a
 2016-08-04 14:00:23,788 [pool-10-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
 2016-08-04 14:00:24,755 [pool-12-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
 2016-08-04 14:00:25,587 [pool-14-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
+2016-08-04 16:49:27,449 [main] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16

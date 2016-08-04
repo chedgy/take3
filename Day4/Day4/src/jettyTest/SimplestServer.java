@@ -1,0 +1,52 @@
+package jettyTest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+ 
+import java.io.IOException;
+ 
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+ 
+public class SimplestServer extends AbstractHandler
+{		//target is url path
+	
+	 @Override
+	 
+    public void handle(String target,
+                       Request baseRequest,
+                       HttpServletRequest request,
+                       HttpServletResponse response) 
+        throws IOException, ServletException
+    {
+    	
+    	//declare response encoding and types
+        response.setContentType("text/html;charset=utf-8");
+        
+        //declare response status code
+        response.setStatus(HttpServletResponse.SC_OK);
+             
+       // write back response
+        response.getWriter().println("<h1>Hello World</h1>");
+//        response.getWriter().println ("Chedva Berdy");
+        
+        
+        //inform jetty that this request has been handled.
+        baseRequest.setHandled(true);
+        
+        
+    }
+ 
+    public static void main(String[] args) throws Exception
+    {
+        Server server = new Server(8080);
+        server.setHandler(new SimplestServer());
+ 
+        server.start();  //start server
+        server.join();
+    }
+}
+
+//for given request will take info and spit out results

@@ -1,0 +1,12 @@
+{
+  "C:\\Program Files\\Java\\jre1.8.0_101\\lib\\rt.jar": {
+    "coordinate": "jre:jre:zip:call:1.0.0",
+    "location": "C:\\Program Files\\Java\\jre1.8.0_101\\lib\\rt.jar",
+    "status": "RESOLVED"
+  },
+  "C:\\GitFile\\take3\\Day4\\Day4\\lib\\jetty-all-9.3.11.M0-uber.jar": {
+    "location": "C:\\GitFile\\take3\\Day4\\Day4\\lib\\jetty-all-9.3.11.M0-uber.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027C:\\GitFile\\take3\\Day4\\Day4\\lib\\jetty-all-9.3.11.M0-uber.jar\u0027. Neither fingerprint \u002727d726d9c07f14d50655c5ea019858aa195924cf\u0027 nor symbolic name \u0027javax.servlet-api\u0027 are known."
+  }
+}
