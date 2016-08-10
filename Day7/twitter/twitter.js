@@ -23,8 +23,11 @@
 // });
 
 var express = require('express');
+var app=express();
 var sqlite3 = require('sqlite3').verbose();
 var fs = require('fs');
+var userid;
+var db;
 
 var filename = 'scratch.db';
 var dbexists = false;
@@ -35,10 +38,11 @@ try {
     dbexists = false;
 }
 
-var db = new sqlite3.Database('scratch.db');
 
 
 if (!dbexists) {
+	var db = new sqlite3.Database('scratch.db');
+
     db.serialize(function() {
         var createUserTableSql = "CREATE TABLE IF NOT EXISTS USER " +
                        "(USERID         CHAR(25)    PRIMARY KEY     NOT NULL," +
@@ -93,11 +97,15 @@ if (!dbexists) {
         db.run(insertUserSql);
         db.run(insertTweetSql);
 
-        db.each("SELECT * FROM TWEET", function(err, row) {
-            console.log(row.USERID + ": " + row.TWEET);
-        });
+        // db.each("SELECT * FROM TWEET", function(err, row) {
+        //     console.log(row.USERID + ": " + row.TWEET);
+        // });
+        db.close()
     });
 }
+
+
+
 
  //-------------------------------------------------------
  // function(err, jsonString) {}
@@ -119,7 +127,7 @@ function getFollowersJSON(userId) {
 	            },
 	            function (err, nRows) {
 	            	if (err){
-	            		rejext(err);
+	            		reject(err);
 	            	}else{
 	                	//callBack(err, JSON.stringify(followers));
 	                	resolve(JSON.stringify(followers));
@@ -134,18 +142,18 @@ function getFollowersJSON(userId) {
 //----------------------------------------------------------------
 
 
-getFollowersJSON('abu').then(
-	(val)=>{
-		console.log("FOLLOWERS:"+val);
-	},
-	(err)=>{
+// getFollowersJSON(userid).then(
+// 	(val)=>{
+// 		console.log("FOLLOWERS:"+val);
+// 	},
+// 	(err)=>{
 
-    if (err) {
-    	console.log(err)
-    }
+//     if (err) {
+//     	console.log(err)
+//     }
 
-    //console.log(jsonString);
-});
+//     //console.log(jsonString);
+// });
 
 
 //------------------------------------------------------------------------
@@ -157,26 +165,34 @@ getFollowersJSON('abu').then(
 function getUserTweetsJSON(userId) {
     	return new Promise((resolve,reject)=>{
 	    var query = "SELECT USERID,TWEET, DATE FROM TWEET "
-	         + "  WHERE USERID = '" + userId + "'";
+	         + "  WHERE USERID = '" + userId + "' ORDER BY DATE";
 	    var userTweets = [];
+	   
 	    //var data[];
 	    db.serialize(function() {
+	    	
 	        db.each(
 	            query, 
 	            function(err, row) {
 	            	if (err){
 	            		reject (err);
+	            		console.log ("json error");
 	            	}else{  
 	            		userTweets.push({"userid":  row.USERID,  "msg" :  row.TWEET , "date": row.DATE});
+	            	
 	                	
 	                }
 	            },
 	            function (err, nRows) {
 	            	if (err){
-	            		rejext(err);
+	            		reject(err);
+	            		console.log (err);
+	            		console.log ("reject error");
+
 	            	}else{
 	                	//callBack(err, JSON.stringify(followers));
 	                	resolve(JSON.stringify(userTweets));
+	                	console.log ("make json string");
 	            	}
 	           }
 	        );
@@ -184,18 +200,18 @@ function getUserTweetsJSON(userId) {
 	});
 }
 //----------------------------------------------------------------
-getUserTweetsJSON('abu').then(
-	(val)=>{
-		console.log("USER TWEETS =" +val);
-	},
-	(err)=>{
+// getUserTweetsJSON(userid).then(
+// 	(val)=>{
+// 		console.log("USER TWEETS =" + val);
+// 	},
+// 	(err)=>{
 
-    if (err) {
-    	console.log(err)
-    }
+//     if (err) {
+//     	console.log(err)
+//     }
 
-    //console.log(jsonString);
-});
+//     //console.log(jsonString);
+// });
 
 //--------------------------------------------------------------------------------
 
@@ -218,7 +234,7 @@ function getUserJSON(userId) {
 	            },
 	            function (err, nRows) {
 	            	if (err){
-	            		rejext(err);
+	            		reject(err);
 	            	}else{
 	                	//callBack(err, JSON.stringify(followers));
 	                	resolve(JSON.stringify(user));
@@ -230,30 +246,19 @@ function getUserJSON(userId) {
     // TODO
 }
 //--------------------------------------------------------------------------
-getUserJSON('abu').then(
-	(val)=>{
-		console.log("USER="+val);
-	},
-	(err)=>{
+// getUserJSON(userid).then(
+// 	(val)=>{
+// 		console.log("USER="+val);
+// 	},
+// 	(err)=>{
 
-    if (err) {
-    	console.log(err)
-    }
+//     if (err) {
+//     	console.log(err)
+//     }
 
-    //console.log(jsonString);
-});
+//     //console.log(jsonString);
+// });
 //----------------------------------------------------
-
-
-// INSERT INTO FOLLOWER (USERID, FOLLOWERID) " +
-//            "VALUES ('shuvo', 'abu')," +
-//                   "('abu', 'swarup')," +
-//                   "('abu', 'charles')," +
-//                   "('beiying', 'shuvo');";
-                
-
-//         var insertTweetSql = "INSERT INTO TWEET (USERID, TWEET, DATE) " 
-//SELECT TWEET.USERID, TWEET,DATE FROM TWEET INNER JOIN FOLLOWER WHERE TWEET.USERID=FOLLOWER.USERID
 
 
 
@@ -261,7 +266,7 @@ function getFollowerTweetsJSON(userId) {
 
 	   	return new Promise((resolve,reject)=>{
 	    var query = "SELECT FOLLOWERID, TWEET,DATE FROM TWEET INNER JOIN FOLLOWER WHERE TWEET.USERID=FOLLOWER.USERID "
-	         + "  AND FOLLOWER.USERID = '" + userId + "'";
+	         + "  AND FOLLOWER.USERID = '" + userId + "' ORDER BY DATE";
 	    var Tweets = [];
 	    //var data[];
 	    db.serialize(function() {
@@ -277,7 +282,7 @@ function getFollowerTweetsJSON(userId) {
 	            },
 	            function (err, nRows) {
 	            	if (err){
-	            		rejext(err);
+	            		reject(err);
 	            	}else{
 	                	//callBack(err, JSON.stringify(followers));
 	                	resolve(JSON.stringify(Tweets));
@@ -288,21 +293,106 @@ function getFollowerTweetsJSON(userId) {
 	});
 }
 //----------------------------------------------------------------
-getFollowerTweetsJSON('abu').then(
-	(val)=>{
-		console.log("FOLLOWER TWEETS =" +val);
-	},
-	(err)=>{
+// getFollowerTweetsJSON(userid).then(
+// 	(val)=>{
+// 		console.log("FOLLOWER TWEETS =" +val);
+// 	},
+// 	(err)=>{
 
-    if (err) {
-    	console.log(err)
-    }
+//     if (err) {
+//     	console.log(err)
+//     }
 
-    //console.log(jsonString);
-});
+//     //console.log(jsonString);
+// });
 
 //     // TODO
 // }
 
-db.close();
+//
 
+
+//---------------------------------------------------------------------
+
+
+
+app.get('/tweets/:id',function(req,res){
+	db = new sqlite3.Database('scratch.db');
+
+	var userid=req.params.id;//('id');//String(req.params);//("id");)
+	// userid=userid.substring (1,userid.length);
+	// userid=userid.substring(userid.indexOf(":")).trim;
+
+	getUserTweetsJSON(userid).then ((val)=> {
+		console.log (val);
+		res.send (val);
+		db.close();
+	}).catch((err)=>{
+		res.send("");
+		console.log ("Unable to get user tweets");
+		db.close();
+	});
+
+    
+
+
+ 	//res.send ('personal(.html');
+ });
+//---------------------------------------------------------
+app.get('/followedtweets/:id',function(req,res){
+	db = new sqlite3.Database('scratch.db');
+
+	var userid=req.params.id;//('id');//String(req.params);//("id");)
+	// userid=userid.substring (1,userid.length);
+	// userid=userid.substring(userid.indexOf(":")).trim;
+
+	getFollowerTweetsJSON(userid).then ((val)=> {
+		console.log (val);
+		res.send (val);
+		db.close();
+	}).catch((err)=>{
+		res.send("");
+		console.log ("Unable to get follower tweets");
+		db.close();
+	});
+
+    
+
+
+ 	//res.send ('personal(.html');
+ });
+
+//-------------------------------------------
+app.get('/user/:id',function(req,res){
+	console.log("in user");
+	db = new sqlite3.Database('scratch.db');
+	console.log ("db open");
+	var userid=req.params.id;//('id');//String(req.params);//("id");)
+	// userid=userid.substring (1,userid.length);
+	// userid=userid.substring(userid.indexOf(":")).trim;
+
+	getUserJSON(userid).then ((val)=> {
+		console.log (val);
+		res.send (val);
+		console.log ("close db");
+		db.close();
+	}).catch((err)=>{
+		res.send("");
+		console.log ("Unable to get user json");
+		db.close();
+	});
+
+    
+
+
+ 	res.send ('personal(.html');
+ });
+//------------------------------------
+
+ app.use(express.static('Public'));
+
+ app.listen(8080, function(){
+ 	console.log ("load user tweet pg");
+ });
+
+ //db.close();
