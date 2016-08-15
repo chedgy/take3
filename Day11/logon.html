@@ -1,0 +1,98 @@
+<html ng-app="signOnApp">
+
+ <head>
+   <meta charset="utf-8">
+   <title>Angular.js Example</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+   <script>
+        var signOnApp = angular.module('signOnApp', []);
+        signOnApp.controller('signOnCtrl', function ($scope){
+        // $scope.logon = [];
+        $scope.name="";
+       // $scope.nameErr=true;
+        $scope.email="";
+       // $scope.emailErr=true;
+        $scope.url="";
+       // $scope.urlErr=true;
+        $scope.msg="";
+       // $scope.msgEr=true;
+    //    $scope.completed=false;
+
+        $scope.nameEntry=function(event){
+            
+            $scope.name= $scope.name1;
+           // $scope.$apply();
+
+            if ($scope.name===""){
+                $scope.nameErr=true;
+            }else{
+                $scope.nameErr=false;
+            }
+            
+        };
+
+         $scope.emailEntry=function(event){
+            
+            if ($scope.email1.includes("@")){
+                 $scope.email= $scope.email1;
+                 $scope.emailErr=false;
+            }else{
+                $scope.emailErr=true;
+            }
+        };
+        
+        $scope.urlEntry=function(event){
+            
+            if ($scope.url1.includes("http://")){
+                 $scope.url= $scope.url1;
+                 $scope.urlErr=false;
+            }else{
+                $scope.urlErr=true;
+            }
+        };
+       
+        $scope.msgEntry=function(event){
+            
+            $scope.msg= $scope.mgs1;
+           console.log ($scope.msg);
+
+            if ($scope.msg===""){
+                $scope.msgErr=true;
+            }else{
+                $scope.msgErr=false;
+            }
+            
+        };
+       
+ });
+
+      
+   </script>
+ </head>
+ <body ng-controller="signOnCtrl">
+     <form >
+        <h1>Contact Us</h1>
+        Name
+        <br>
+        <input type="text" id="txtName" ng-model="name1" ng-keyup="nameEntry($event)"> </input>
+        <div style="color:red" ng-show="nameErr"> You must enter your name!</div>
+        <br>
+        E-mail
+        <br>
+        <input type="text" id="txtEmail" ng-model="email1" ng-keyup="emailEntry($event)"> </input>
+        <div style="color:red" ng-show="emailErr"> You must enter a valid e-mail containing an @ !</div>
+        <br>
+        Website
+        <br>
+        <input type="text" id="txtUrl" ng-model="url1" ng-keyup="urlEntry($event)"> </input>
+        <div style="color:red" ng-show="urlErr"> Website must start with http:// </div>
+        <br>
+        Message
+        <br>
+        <input type="text" id="txtMsg" ng-model="msg1" ng-keyup="msgEntry($event)"> </input>
+        <div style="color:red" ng-show="msgErr"> Message may not be empty!</div>
+
+       
+    </form>
+ </body>
+</html>
