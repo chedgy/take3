@@ -1,0 +1,42 @@
+<html ng-app="taskApp">
+
+ <head>
+   <meta charset="utf-8">
+   <title>Angular.js Example</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+   <script>
+    var obj;
+     var taskApp = angular.module('taskApp', []);
+     taskApp.controller('taskCtrl', function ($scope){
+       $scope.tasks = [];
+       $scope.completed=false;
+
+     $scope.IsEnter=function(event){
+        
+            if (event.keyCode===13){
+            
+                $scope.tasks.push({"todo":$scope.job, "done":false});
+                $scope.$apply();
+            
+            }
+        };
+
+       
+   
+       
+ });
+
+      
+   </script>
+ </head>
+ <body ng-controller="taskCtrl">
+    Enter a task: <input type="text" ng-model="job" ng-keypress="IsEnter($event)"></input>
+   <br> to do
+   <ul>
+     <li ng-repeat="task in tasks | filter:{done: completed}"><input type="checkbox" ng-model="task.done" ng-true-value="true"" > {{$index+1}}.{{task.todo}}</li>
+   </ul>
+   <button type="button" ng-click="completed=true">Completed</button>
+   <button type="button" ng-click="completed=false">To Do </button>
+   
+ </body>
+</html>

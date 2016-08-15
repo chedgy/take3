@@ -1,0 +1,35 @@
+
+
+
+<html ng-app="movieApp">
+<head>
+   <meta charset="utf-8">
+   <title>Day-11, Assignment1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+   <script>
+     var movieApp = angular.module('movieApp', []);
+     movieApp.controller('MovieCtrl', function ($scope, $http){
+       var url = 'http://www.omdbapi.com/?t=batman&y=&plot=short&r=json';
+       $http.get(url).success(function(data) {
+           $scope.movies=data;
+        //    console.log (data);
+       });
+     });
+   </script>
+ </head>
+ <body ng-controller="MovieCtrl">
+
+        <p>
+        {{movies.Title}}
+        {{movies.Year}}
+   
+ </body>
+</html>
+
+
+
+
+
+  
+
+

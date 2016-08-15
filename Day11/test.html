@@ -1,0 +1,19 @@
+<html ng-app="nameApp">
+
+ <head>
+   <meta charset="utf-8">
+   <title>Angular.js Example</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+   <script>
+     var nameApp = angular.module('nameApp', []);
+     nameApp.controller('taskCtrl', function ($scope){
+       $scope.names = ['Larry', 'Curly', 'Moe'];
+     });
+   </script>
+ </head>
+ <body ng-controller="taskCtrl">
+   <ul>
+     <li ng-repeat="name in names">{{name}}</li>
+   </ul>
+ </body>
+</html>

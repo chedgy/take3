@@ -1,0 +1,26 @@
+<html ng-app="nameApp">
+
+ <head>
+   <meta charset="utf-8">
+   <title>Angular.js Example</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+   <script>
+     var nameApp = angular.module('taskApp', []);
+     nameApp.controller('taskCtrl', function ($scope){
+       $scope.task = [];
+     });
+   </script>
+ </head>
+ <body ng-controller="taskCtrl">
+   <input type="text" ng-model="task" onkeypress=DoEnter(evt) >Input a task to be done </input>
+
+   <ul>
+     <li ng-repeat="task in tasks">{{task}}</li>
+   </ul>
+
+   <script>
+       function DoEnter(evt){
+           console.log (evt);
+       }
+ </body>
+</html>

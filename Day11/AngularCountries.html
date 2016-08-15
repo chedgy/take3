@@ -1,0 +1,60 @@
+<html ng-app="countryApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Angular.js Example</title>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+   
+    <script>
+
+
+      
+
+
+      var countryApp =  angular.module('countryApp', []);
+      countryApp.controller('CountryCtrl',  function ($scope){
+    
+          $scope.countries = [
+            {
+                "name": "China",
+            "population": 1359821000,
+            "flagURL": "//upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg",
+            "capital": "Beijing",
+            "gdp": 12261
+            },
+            {
+            "name": "India",
+            "population": 1205625000,
+            "flagURL": "//upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg",
+            "capital": "New Delhi",
+            "gdp": 4716
+            },
+            {
+            "name": "United States of America",
+            "population": 312247000,
+            "flagURL": "//upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg",
+            "capital": "Washington, D.C.",
+            "gdp": 16244
+            }
+            ];
+            console.log($scope.countries);
+    
+      });
+    </script>
+  </head>
+  <body ng-controller="CountryCtrl">
+    Search:<input ng-model="query" type="text"/>
+  
+    <table>
+      <tr>
+        <th>Country</th>
+        <th>Population</th>
+      </tr>
+      <tr ng-repeat="country in countries" | filter:query | orderBy:'population'">
+        <td>{{country.name}}</td>
+        <td>{{country.population}}</td>
+      </tr>
+    </table>
+  </body>
+</html>
+
+
