@@ -1,0 +1,167 @@
+<html ng-app="storeApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Store</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
+    <script>
+      var storeApp = angular.module('storeApp', ['ngRoute']);
+
+      storeApp.config(function($routeProvider) {
+            $routeProvider.
+                when('/', {
+                    templateUrl: 'category-list.html',
+                    controller: 'categoryListCtrl'
+           }).
+           when('/:category',{
+               templateUrl: 'item-list.html',
+               controller: 'itemListCtrl'
+        //   }).
+        //   when('/:item', {
+        //     templateUrl: 'item-detail.html',
+        //     controller: 'itemDetailCtrl'
+        //   }).
+        //   otherwise({
+        //     redirectTo: '/'
+            });
+        });
+
+  
+    
+        // storeApp.factory('items', function($http){
+
+        //     var cachedData;
+
+        //     function getData(callback){
+        //         if(cachedData) {
+        //             callback(cachedData);
+        //         } else {
+        //             $http.get('inventory.json').success(function(data){
+        //             cachedData = data;
+        //             callback(data);
+        //             });
+        //         }
+        //     }
+
+        //     return {
+        //         list: getData,
+        //         find: function(item, callback){
+        //             getData(function(data) {
+        //                 var anItem = data.filter(function(entry){
+        //                     return entry.item === item;
+        //                 })[0];
+                
+        //                 callback(anItem);
+        //             });
+        //         }
+        //     };
+        // });
+
+        
+        // storeApp.controller('CategoryListCtrl', function ($scope, categories){
+        //     categories.list(function(categories) {
+        //         $scope.categories = categories.category;
+        //     });
+        // });
+
+
+
+    // storeApp.factory('inventory', function($http){
+    //     return {
+    //       list: function(callback){
+    //         $http.get('inventory.json').success(callback);
+    //       }
+    //     };
+    //   });
+
+    //   storeApp.controller('itemListCtrl', function ($scope, $routeParams, $http){
+    //     $http.get('inventory.json').success(function(data) {
+    //       $scope.item = data.filter(function(entry){
+    //         return entry.name === $routeParams.category
+    //       })[0];
+    //     });
+    //   });
+
+    //  storeApp.controller('itemListCtrl', function ($scope, $routeParams, $http){
+    //     $scope.category = $routeParams.category;
+
+    //     $http.get('inventory.json').success(function(data) {
+    //       $scope.items = data.filter(function(entry){
+           
+            
+    //         return entry.category === $scope.category;
+    //       });
+    //       console.log($scope.items)
+    //     });
+    //   });
+
+//*************************
+
+
+        storeApp.controller("categoryListCtrl",  function ($scope, $http){
+        $http.get('category.json').success(function(data) {
+          $scope.categories = data;
+          console.log ($scope.categories);
+        });
+      });
+      //*******************************
+      
+       storeApp.controller("itemListCtrl",  function ($scope,$routeParams, $http){
+        $scope.inventory=[];
+        $scope.name=$routeParams.category;
+        console.log($routeParams);
+            $http.get('inventory.json').success(function(data) {
+                
+            
+               // $scope.Tempinventory=data;
+              
+
+                for (var x in data){
+                    if (data[x].category===$scope.name){
+                        $scope.inventory.push(data[x])
+                        console.log (data[x]);
+                    }
+                    console.log("out:" + data[x]);
+                }
+             });
+       });
+
+
+    //   //*******************************
+    //    storeApp.controller("itemListCtrl",  function ($scope, $http){
+    //     $http.get('inventory.json').success(function(data) {
+    //       $scope.inventory = data;
+
+            
+    //       console.log ($scope.inventory);
+    //     });
+    //   });
+
+
+    
+    //   storeApp.controller('itemListCtrl', function ($scope, $routeParams, categories){
+    //     categories.find($routeParams.category, function(category) {
+    //       $scope.category = category;
+    //     });
+    //   });
+
+
+    //    storeApp.controller('itemDetailCtrl', function ($scope, $routeParams, categories){
+    //     categories.find($routeParams.item, function(category) {
+    //       $scope.item = item;
+          
+    //     });
+    //   });
+    </script>
+  </head>
+  <body ng-app ="storeApp">
+      <div > Menu goes here.
+          
+      </div>
+          
+     <div ng-view > </div>
+
+     <div> footer here</div>
+
+</body>
+</html>

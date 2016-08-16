@@ -1,0 +1,9 @@
+[{"category":"books", "item": "book1", "cost" : 13.99},
+ {"category":"books","item": "book2", "cost" : 22.40},
+ {"category":"books","item" : "book3", "cost" : 32.33},
+ {"category": "clothing", "item":"shirt1", "cost": 22.29},
+ {"category": "clothing", "item":"shirt2", "cost" : 9.99},
+ {"category": "clothing", "item": "pants1", "cost" :72.55},
+ {"category": "toys", "item":"toy1", "cost": 30.64},
+ {"category": "toys", "item": "toy2", "cost": 2.99},
+ {"category": "toys", "item": "toy3", "cost":152.79}]
